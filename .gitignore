@@ -1,0 +1,11 @@
+# terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfvars
+**/*.tfstate
+**/*.tfstate.*
+crash.log
+
+# secrets
+*.auto.tfvars
+secrets.*
