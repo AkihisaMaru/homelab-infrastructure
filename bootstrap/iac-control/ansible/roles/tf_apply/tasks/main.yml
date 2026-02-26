@@ -50,6 +50,7 @@
   ansible.posix.authorized_key:
     user: "{{ tf_user }}"
     key: "{{ runner_public_key }}"
+    key: "{{ lookup('file', runner_public_key) }}"
     state: present
   when: runner_public_key | length > 0
 
