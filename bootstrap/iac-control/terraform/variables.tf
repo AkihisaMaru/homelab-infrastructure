@@ -1,16 +1,16 @@
-variable "pm_api_url" {
+variable "pve_api_url" {
   type        = string
   description = "Proxmox API URL"
   default = "https://192.168.100.1:8006/api2/json"
 }
 
-variable "pm_api_token_id" {
+variable "pve_api_token_id" {
   type        = string
   description = "Proxmox API token ID"
   default = "terraform@pam!iac"
 }
 
-variable "pm_api_token_secret" {
+variable "pve_api_token_secret" {
   type        = string
   description = "Proxmox API token secret"
   sensitive   = true
@@ -40,8 +40,7 @@ variable "root_password" {
   sensitive   = true
 }
 
-variable "root_ssh_public_key" {
+variable "ssh_public_key" {
   type        = string
-  description = "Public SSH key used for initial root access and bootstrap provisioning"
-  sensitive   = true
+  description = "Public SSH key path (GitHub self-hosted runner -> IaC Controller)"
 }
