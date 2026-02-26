@@ -5,11 +5,12 @@ provider "proxmox" {
   pm_tls_insecure     = true
 }
 
-resource "proxmox_lxc" "runner" {
+resource "proxmox_lxc" "iac-control" {
   target_node = "pve"
   hostname    = "iac-control"
   ostemplate  = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
-  password    = var.root_password
+
+  ssh_public_keys = var.root_ssh_public_key
 
   cores  = 2
   memory = 2048
