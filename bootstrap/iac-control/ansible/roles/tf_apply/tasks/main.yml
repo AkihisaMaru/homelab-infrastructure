@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     update_cache: true
     name:
-      - ca-cetificates
+      - ca-certificates
       - curl
       - git
       - gnupg
@@ -85,6 +85,6 @@
 
 - name: Ensure ssh service enabled
   ansible.builtin.service:
-  name: ssh
-  enable: true
-  state: started
+    name: ssh
+    enabled: true
+    state: started
