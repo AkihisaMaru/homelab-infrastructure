@@ -7,7 +7,7 @@ provider "proxmox" {
 
 resource "proxmox_lxc" "runner" {
   target_node = "pve"
-  hostname    = "gh-runner"
+  hostname    = "iac-control"
   ostemplate  = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password    = var.root_password
 
