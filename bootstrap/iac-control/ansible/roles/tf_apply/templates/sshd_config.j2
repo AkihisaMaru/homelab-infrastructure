@@ -1,0 +1,17 @@
+Port 22
+Protocol 2
+
+PermitRootLogin no
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+
+PubkeyAuthentication yes
+
+AllowUsers {{ tf_user }}
+
+X11Forwarding no
+AllowAgentForwarding no
+AllowTcpForwarding no
+PermitTunnel no

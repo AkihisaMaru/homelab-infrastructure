@@ -1,0 +1,2 @@
+pm_api_token_secret = "PUT_SECRET_HERE"
+root_password = "PUT_TEMP_ROOT_PASSWORD_HERE"

@@ -1,0 +1,4 @@
+- hosts: tf_apply
+  become: true
+  roles:
+    - tf_apply

@@ -1,0 +1,9 @@
+tf_user: tfci
+tf_workflow: /opt/tf
+
+terraform_version: "1.14.5"
+terraform_arch: "amd64"
+
+runner_public_key: ""
+
+ssh_force_command: "/usr/local/bin/run-terraform.sh"
