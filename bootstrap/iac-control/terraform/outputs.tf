@@ -1,5 +1,5 @@
 output "runner_name" {
-  value = proxmox_lxc.runner.hostname
+  value = proxmox_lxc.iac-control.hostname
 }
 
 output "runner_ip" {

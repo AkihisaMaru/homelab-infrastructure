@@ -39,3 +39,9 @@ variable "root_password" {
   description = "Root password for the runner LXC"
   sensitive   = true
 }
+
+variable "root_ssh_public_key" {
+  type        = string
+  description = "Public SSH key used for initial root access and bootstrap provisioning"
+  sensitive   = true
+}
