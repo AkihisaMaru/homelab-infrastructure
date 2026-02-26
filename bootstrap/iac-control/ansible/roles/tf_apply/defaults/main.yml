@@ -1,5 +1,6 @@
 tf_user: tfci
 tf_workflow: /opt/tf
+tf_workdir: "/opt/tf"
 
 terraform_version: "1.14.5"
 terraform_arch: "amd64"
