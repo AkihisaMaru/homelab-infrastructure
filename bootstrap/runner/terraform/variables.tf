@@ -17,7 +17,10 @@ variable "template_id" { type = string }
 
 variable "bridge" { type = string }
 variable "gateway" { type = string }
-variable "cidr" { type = number, default = 24 }
+variable "cidr" { 
+  type = number
+  default = 24
+}
 
 variable "ssh_public_key" {
   type        = string
