@@ -1,7 +1,7 @@
-output "runner_name" {
-  value = proxmox_lxc.runner.hostname
+output "k3s_control_plane" {
+  value = var.control_plane.ip
 }
 
-output "runner_ip" {
-  value = "192.168.100.100"
+output "k3s_worker_node" {
+  value = [for x in var.worker_nodes : x.ip ]
 }

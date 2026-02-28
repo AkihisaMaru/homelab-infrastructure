@@ -1,2 +1,41 @@
+pve_api_url = "https://192.168.100.1:8006/api2/json"
+pve_api_token_id = "terraform@pam!iac"
 pm_api_token_secret = "PUT_SECRET_HERE"
-root_password = "PUT_TEMP_ROOT_PASSWORD_HERE"
+
+target_node = "pve"
+template_id = 1000
+
+bridge = "vnet1"
+gateway = "192.168.100.1"
+cidr = 24
+
+ssh_public_key = "/root/.ssh/iac_control_key.pub"
+
+control_plane = {
+  vmid = 1002
+  name = "k3s-control-plane"
+  ip = "192.168.100.102"
+  cores = 1
+  memory = 2048
+  disk_gb = 20
+}
+
+worker_nodes = [
+  {
+    vmid = 1003
+    name = "k3s-worker-node-1"
+    ip = "192.168.100.103"
+    cores = 2
+    memory = 4096
+    disk_gb = 30
+  },
+  {
+    vmid = 1004
+    name = "k3s-worker-node-2"
+    ip = "192.168.100.103"
+    cores = 2
+    memory = 4096
+    disk_gb = 30
+  },
+]
+
