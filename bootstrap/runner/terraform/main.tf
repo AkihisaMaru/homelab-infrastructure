@@ -9,7 +9,7 @@ locals {
   ssh_public_key = trimspace(file(var.ssh_public_key))
 }
 
-resource "proxmox_ve_qemu" "k3s_control_plane" {
+resource "proxmox_vm_qemu" "k3s_control_plane" {
   name = var.control_plane.name
   target_node = var.target_node
   vmid = var.control_plane.vmid
@@ -43,7 +43,7 @@ resource "proxmox_ve_qemu" "k3s_control_plane" {
   onboot = true
 }
 
-resource "proxmox_ve_qemu" "k3s_worker_node" {
+resource "proxmox_vm_qemu" "k3s_worker_node" {
   count = length(var.worker_nodes)
   name = var.worker_nodes[count.index].name
   target_node = var.target_node
