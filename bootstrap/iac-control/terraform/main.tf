@@ -6,9 +6,10 @@ provider "proxmox" {
 }
 
 resource "proxmox_lxc" "iac-control" {
-  target_node = "pve"
-  hostname    = "iac-control"
-  ostemplate  = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  target_node = var.target_node
+  hostname    = var.hostname
+  ostemplate  = var.ostemplate
+  vmid = var.vmid
 
   ssh_public_keys = trimspace(file(var.ssh_public_key))
 
@@ -23,7 +24,7 @@ resource "proxmox_lxc" "iac-control" {
   network {
     name   = "eth0"
     bridge = var.bridge
-    ip     = var.ip_cidr
+    ip     = var.ip
     gw     = var.gateway
   }
 
