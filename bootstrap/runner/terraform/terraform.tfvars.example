@@ -9,7 +9,7 @@ bridge = "vnet1"
 gateway = "192.168.100.1"
 cidr = 24
 
-ssh_public_key = "/root/.ssh/iac_control_key.pub"
+ssh_public_key = "/root/.ssh/homelab_admin.pub"
 
 control_plane = {
   vmid = 500
