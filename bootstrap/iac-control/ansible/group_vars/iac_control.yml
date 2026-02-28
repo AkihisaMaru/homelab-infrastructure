@@ -1,0 +1,10 @@
+admin_user: ubuntu
+admin_pubkey_file: /root/.ssh/homelab_admin.pub
+
+tf_user: ci
+tf_workdir: /opt/tf
+
+terraform_version: "1.14.5"
+terraform_arch: "amd64"
+
+runner_pubkey_file: /root/.ssh/iac_control.pub

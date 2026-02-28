@@ -1,0 +1,41 @@
+- name: Install base packages
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - ca-certificates
+      - curl
+      - git
+      - gnupg
+      - jq
+      - unzip
+    state: present
+
+- name: Create terraform workdir
+  ansible.builtin.file:
+    path: "{{ tf_workdir }}"
+    state: directory
+    owner: "{{ tf_user }}"
+    group: "{{ tf_user }}"
+    mode: "0750"
+
+- name: Download terraform
+  ansible.builtin.get_url:
+    url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_{{ terraform_arch }}.zip"
+    dest: "/tmp/terraform.zip"
+
+- name: Install terraform binary
+  ansible.builtin.unarchive:
+    src: "/tmp/terraform.zip"
+    dest: "/usr/local/bin"
+    remote_src: true
+    mode: "0755"
+
+- name: Install run-terraform wrapper
+  ansible.builtin.copy:
+    dest: "/usr/local/bin/run-terraform.sh"
+    mode: "0755"
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+      cd "{{ tf_workdir }}"
+      exec "$SHELL" -lc "$*"

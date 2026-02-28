@@ -1,0 +1,56 @@
+- name: Ensure sudo installed
+  ansible.builtin.apt:
+    update_cache: true
+    name: sudo
+    state: present
+
+# ---- Admin user (ubuntu) ----
+- name: Create admin user
+  ansible.builtin.user:
+    name: "{{ admin_user }}"
+    groups: sudo
+    append: true
+    shell: /bin/bash
+    create_home: true
+
+- name: Ensure admin .ssh dir exists
+  ansible.builtin.file:
+    path: "/home/{{ admin_user }}/.ssh"
+    state: directory
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0700"
+
+- name: Install admin authorized key
+  ansible.posix.authorized_key:
+    user: "{{ admin_user }}"
+    key: "{{ lookup('file', admin_pubkey_file) }}"
+    state: present
+
+- name: Allow passwordless sudo for admin
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ admin_user }}"
+    content: "{{ admin_user }} ALL=(ALL) NOPASSWD:ALL\n"
+    mode: "0440"
+
+# ---- CI user (tf_user) ----
+- name: Create CI user
+  ansible.builtin.user:
+    name: "{{ tf_user }}"
+    shell: /bin/bash
+    create_home: true
+
+- name: Ensure CI .ssh dir exists
+  ansible.builtin.file:
+    path: "/home/{{ tf_user }}/.ssh"
+    state: directory
+    owner: "{{ tf_user }}"
+    group: "{{ tf_user }}"
+    mode: "0700"
+
+- name: Install runner public key
+  ansible.posix.authorized_key:
+    user: "{{ tf_user }}"
+    key: "{{ lookup('file', runner_pubkey_file) }}"
+    state: present
+  when: runner_pubkey_file is defined

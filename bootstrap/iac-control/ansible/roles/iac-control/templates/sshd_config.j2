@@ -9,9 +9,8 @@ UsePAM yes
 
 PubkeyAuthentication yes
 
-AllowUsers {{ tf_user, ubuntu }}
+AllowUsers {{ admin_user }} {{ tf_user }}
 
 X11Forwarding no
-AllowAgentForwarding no
 AllowTcpForwarding no
 PermitTunnel no

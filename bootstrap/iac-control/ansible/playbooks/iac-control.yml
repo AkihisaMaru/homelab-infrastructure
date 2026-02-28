@@ -1,0 +1,4 @@
+- hosts: iac_control
+  become: true
+  roles:
+    - iac_control
