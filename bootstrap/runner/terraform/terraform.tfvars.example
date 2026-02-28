@@ -3,7 +3,7 @@ pve_api_token_id = "terraform@pam!iac"
 pm_api_token_secret = "PUT_SECRET_HERE"
 
 target_node = "pve"
-template_id = "900"
+template_id = 900
 
 bridge = "vnet1"
 gateway = "192.168.100.1"
