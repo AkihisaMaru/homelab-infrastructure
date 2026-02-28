@@ -13,7 +13,7 @@ variable "pve_api_token_secret" {
 }
 
 variable "target_node" { type = string }
-variable "template_id" { type = number }
+variable "template_name" { type = string }
 
 variable "bridge" { type = string }
 variable "gateway" { type = string }

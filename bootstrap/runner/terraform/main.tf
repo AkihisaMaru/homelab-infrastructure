@@ -14,7 +14,7 @@ resource "proxmox_vm_qemu" "k3s_control_plane" {
   target_node = var.target_node
   vmid = var.control_plane.vmid
 
-  clone = var.template_id
+  clone = var.template_name
   full_clone = true
 
   cores = var.control_plane.cores
@@ -51,7 +51,7 @@ resource "proxmox_vm_qemu" "k3s_worker_node" {
   target_node = var.target_node
   vmid = var.worker_nodes[count.index].vmid
 
-  clone = var.template_id
+  clone = var.template_name
   full_clone = true
 
   cores = var.worker_nodes[count.index].cores
