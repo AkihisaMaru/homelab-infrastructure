@@ -6,9 +6,9 @@ variable "pve_api_token_secret" {
   sensitive   = true
 }
 
-variable "target_node" { type = "string" }
-variable "hostname" { type = "string" }
-variable "ostemplate" { type = "string" }
+variable "target_node" { type = string }
+variable "hostname" { type = string }
+variable "ostemplate" { type = string }
 variable "vmid" { type = number }
 
 variable "bridge" { type = string }
