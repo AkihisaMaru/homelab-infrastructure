@@ -57,7 +57,7 @@ resource "proxmox_vm_qemu" "k3s_worker_node" {
   cores = var.worker_nodes[count.index].cores
   memory = var.worker_nodes[count.index].memory
 
-  disk  {
+  disk {
     slot = "scsi0"
     type = "scsi"
     storage = "local-lvm"
