@@ -23,7 +23,7 @@ resource "proxmox_vm_qemu" "k3s_control_plane" {
 
   disk {
     slot = "scsi0"
-    type = "scsi"
+    type = "disk"
     storage = "local-lvm"
     size = "${var.control_plane.disk_gb}G"
   }
@@ -59,7 +59,7 @@ resource "proxmox_vm_qemu" "k3s_worker_node" {
 
   disk {
     slot = "scsi0"
-    type = "scsi"
+    type = "disk"
     storage = "local-lvm"
     size = "${var.worker_nodes[count.index].disk_gb}G"
   }
