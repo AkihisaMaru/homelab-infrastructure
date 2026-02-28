@@ -34,10 +34,10 @@ resource "proxmox_vm_qemu" "k3s_control_plane" {
 
   os_type = "cloud-init"
 
-  ipconfig0 = "ip=${var.control_plane.ip}/${var.cider},gw=${var.gateway}"
+  ipconfig0 = "ip=${var.control_plane.ip}/${var.cidr},gw=${var.gateway}"
   ciuser = "ubuntu"
   
-  sshkeys = locals.ssh_public_key
+  sshkeys = local.ssh_public_key
 
   agent = 1
   onboot = true
@@ -70,7 +70,7 @@ resource "proxmox_vm_qemu" "k3s_worker_node" {
 
   ipconfig0 = "ip=${var.worker_nodes[count.index].ip}/${var.cidr},gw=${var.gateway}"
   ciuser = "ubuntu"
-  sshkeys = locals.ssh_public_key
+  sshkeys = local.ssh_public_key
 
   agent = 1
   onboot = true
