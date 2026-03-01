@@ -1,0 +1,11 @@
+- import_tasks: k3s_control_plane.yml
+  when: inventory_hostname in groups['k3s_control_plane']
+
+- import_tasks: k3s_worker_nodes.yml
+  when: inventory_hostname in groups['k3s_worker_nodes']
+
+- import_tasks: kubeconfig.yml
+  when: inventory_hostname in groupse['k3s_control_plane']
+
+- import_tasks: arc.yml
+  when: inventory_hostname in groups['k3s_control_plane']

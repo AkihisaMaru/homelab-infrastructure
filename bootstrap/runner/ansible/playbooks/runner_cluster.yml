@@ -1,0 +1,4 @@
+- hosts: runner_cluster
+  become: true
+  roles:
+    - runner_cluster

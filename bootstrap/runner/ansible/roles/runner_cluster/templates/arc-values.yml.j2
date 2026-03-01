@@ -1,0 +1,18 @@
+githubConfigUrl: "https://github.com/{{ github_repo }}"
+githubConfigSecret: "github-pat"
+
+minRunners: {{ min_runners }}
+maxRunners: {{ max_runners }}
+
+runnerGroup: "{{ runner_group }}"
+
+runnerScaleSetName: "homelab-runners"
+
+template:
+  spec:
+    containers:
+      - name: runner
+        image: ghcr.io/actions/actions-runner:latest
+        env:
+          - name: RUNNER_LABELS
+            value: "{{ runner_labels | join(',') }}"

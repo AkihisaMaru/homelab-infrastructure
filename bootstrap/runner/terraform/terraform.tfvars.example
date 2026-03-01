@@ -3,7 +3,7 @@ pve_api_token_id = "terraform@pam!iac"
 pm_api_token_secret = "PUT_SECRET_HERE"
 
 target_node = "pve"
-template_id = "ubuntu-2204-template"
+template_name = "ubuntu-2204-template"
 
 bridge = "vnet1"
 gateway = "192.168.100.1"

@@ -1,0 +1,40 @@
+- name: Install helm
+  ansible.builtin.shell: |
+    curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  args:
+    creates: /usr/local/bin/helm
+
+- name: Ensure ARC namespace exists
+  ansible.builtin.command: kubectl create namespace {{ arc_namespace }}
+  register: ns_create
+  failed_when: false
+  changed_when: "'created' in ns_create.stdout"
+
+- name: Install ARC controller (scale set controller)
+  ansible.builtin.command: >
+    helm upgrade --install {{ arc_release }}
+    {{ arc_chart }}
+    --namespace {{ arc_namespace }}
+    --create-namespace
+  register: arc_install
+  changed_when: "'deployed' in arc_install.stdout or 'installed' in arc_install.stdout"
+
+- name: Create GitHub PAT secret
+  ansible.builtin.shell: |
+    kubectl -n {{ arc_namespace }} delete secret github-pat --ignore-not-found
+    kubectl -n {{ arc_namespace }} create secret generic github-pat --from-literal=github_token='{{ github_pat }}'
+  no_log: true
+
+- name: Render runner values
+  ansible.builtin.template:
+    src: arc-values.yml.j2
+    dest: /tmp/runner-values.yaml
+    mode: "0600"
+  no_log: true
+
+- name: Install Runner Scale Set
+  ansible.builtin.command: >
+    helm upgrade --install {{ runner_release }}
+    {{ runner_chart }}
+    --namespace {{ arc_namespace }}
+    -f /tmp/runner-values.yml
