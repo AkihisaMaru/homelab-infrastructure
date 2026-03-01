@@ -1,4 +1,8 @@
 - hosts: runner_cluster
   become: true
+  vars_prompt:
+    - name: github_pat
+      prompt: "Enter GitHub PAT"
+      private: true
   roles:
     - runner_cluster
