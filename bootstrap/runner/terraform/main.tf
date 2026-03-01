@@ -20,7 +20,6 @@ resource "proxmox_vm_qemu" "k3s_control_plane" {
   cores = var.control_plane.cores
   memory = var.control_plane.memory
 
-
   disk {
     slot = "scsi0"
     type = "disk"
@@ -28,14 +27,17 @@ resource "proxmox_vm_qemu" "k3s_control_plane" {
     size = "${var.control_plane.disk_gb}G"
   }
 
+  disk {
+    slot    = "ide2"
+    type    = "cloudinit"
+    storage = "local-lvm"
+  }
+
   network {
     id = 0
     model = "virtio"
     bridge = var.bridge
   }
-
-  os_type = "cloud-init"
-  cloudinit_cdrom_storage = "local-lvm"
 
   ipconfig0 = "ip=${var.control_plane.ip}/${var.cidr},gw=${var.gateway}"
   ciuser = "ubuntu"
@@ -65,14 +67,17 @@ resource "proxmox_vm_qemu" "k3s_worker_node" {
     size = "${var.worker_nodes[count.index].disk_gb}G"
   }
 
+  disk {
+    slot    = "ide2"
+    type    = "cloudinit"
+    storage = "local-lvm"
+  }
+
   network {
     id = 0
     model = "virtio"
     bridge = var.bridge
   }
-
-  os_type = "cloud-init"
-  cloudinit_cdrom_storage = "local-lvm"
 
   ipconfig0 = "ip=${var.worker_nodes[count.index].ip}/${var.cidr},gw=${var.gateway}"
   ciuser = "ubuntu"
