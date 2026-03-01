@@ -35,6 +35,7 @@ resource "proxmox_vm_qemu" "k3s_control_plane" {
   }
 
   os_type = "cloud-init"
+  cloudinit_cdrom_storage = "local-lvm"
 
   ipconfig0 = "ip=${var.control_plane.ip}/${var.cidr},gw=${var.gateway}"
   ciuser = "ubuntu"
@@ -71,6 +72,7 @@ resource "proxmox_vm_qemu" "k3s_worker_node" {
   }
 
   os_type = "cloud-init"
+  cloudinit_cdrom_storage = "local-lvm"
 
   ipconfig0 = "ip=${var.worker_nodes[count.index].ip}/${var.cidr},gw=${var.gateway}"
   ciuser = "ubuntu"
