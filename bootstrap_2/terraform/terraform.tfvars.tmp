@@ -1,0 +1,5 @@
+pve_api_url = "https://192.168.100.1:8006/api2/json"
+pve_api_token_id = "terraform@pam!iac"
+pve_api_token_secret = "SECRET"
+
+ssh_public_key = "/root/.ssh/homelab_admin.pub"
