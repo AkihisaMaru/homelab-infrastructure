@@ -56,7 +56,7 @@ module "k3s_control_plane" {
   }
 
   ipconfig0 = "ip=192.168.100.50/24,gw=192.168.100.1"
-  ciuser = "ubuntu
+  ciuser = "ubuntu"
 
   sshkeys = local.ssh_public_key
 
